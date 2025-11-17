@@ -8,6 +8,8 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.stonemountain.demo.java.KeycloakController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -43,93 +45,114 @@
       </MenuBar>
    </top>
    <center>
-      <SplitPane dividerPositions="0.3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-        <items>
-          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-               <children>
-                  <TitledPane animated="false" collapsible="false" text="KeyCloak Clients" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <content>
-                        <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                     </content>
-                  </TitledPane>
-               </children>
-            </AnchorPane>
-          <AnchorPane maxWidth="1.7976931348623157E308">
-               <children>
-                  <VBox layoutX="129.0" layoutY="119.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <TitledPane animated="false" collapsible="false" text="CR Status">
-                           <content>
-                              <GridPane maxWidth="1.7976931348623157E308">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints vgrow="SOMETIMES" />
-                                  <RowConstraints vgrow="SOMETIMES" />
-                                    <RowConstraints vgrow="SOMETIMES" />
-                                </rowConstraints>
+      <TabPane BorderPane.alignment="CENTER">
+         <tabs>
+            <Tab text="Production">
+               <content>
+                  <SplitPane dividerPositions="0.3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                    <items>
+                      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <TitledPane animated="false" collapsible="false" text="KeyCloak Clients" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <ListView fx:id="clientView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                                 </content>
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </TitledPane>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane maxWidth="1.7976931348623157E308">
+                           <children>
+                              <VBox layoutX="129.0" layoutY="119.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label text="Latest Deployment Time:" />
-                                    <Label text="Deployments status:" GridPane.rowIndex="1" />
-                                    <Label text="Link to CR:" GridPane.rowIndex="2" />
-                                    <Hyperlink text="http://console.apps.c03p.pass.jyskebank.net" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Label text="Success" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label text="29-07-2005 10:47" GridPane.columnIndex="1" />
-                                 </children>
-                              </GridPane>
-                           </content>
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </TitledPane>
-                        <SplitPane dividerPositions="0.5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
-                          <items>
-                            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <children>
-                                    <TitledPane animated="false" collapsible="false" layoutX="-13.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Dependencies" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <TitledPane animated="false" collapsible="false" text="CR Status">
+                                       <content>
+                                          <GridPane maxWidth="1.7976931348623157E308">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints vgrow="SOMETIMES" />
+                                              <RowConstraints vgrow="SOMETIMES" />
+                                                <RowConstraints vgrow="SOMETIMES" />
+                                            </rowConstraints>
                                              <children>
-                                                <TreeView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Label text="Latest Deployment Time:" />
+                                                <Label text="Deployments status:" GridPane.rowIndex="1" />
+                                                <Label text="Link to CR:" GridPane.rowIndex="2" />
+                                                <Hyperlink text="http://console.apps.c03p.pass.jyskebank.net" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label text="Success" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label text="29-07-2005 10:47" GridPane.columnIndex="1" />
                                              </children>
-                                          </AnchorPane>
-                                      </content>
+                                          </GridPane>
+                                       </content>
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </TitledPane>
-                                 </children>
-                              </AnchorPane>
-                            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <children>
-                                    <TitledPane animated="false" collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Dependents" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <content>
+                                    <SplitPane dividerPositions="0.5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                      <items>
                                         <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                                              <children>
-                                                <TreeView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <TitledPane animated="false" collapsible="false" layoutX="-13.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Dependencies" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <TreeView fx:id="dependenciesView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                         </children>
+                                                      </AnchorPane>
+                                                  </content>
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </TitledPane>
                                              </children>
                                           </AnchorPane>
-                                      </content>
-                                    </TitledPane>
+                                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                             <children>
+                                                <TitledPane fx:id="dependents" animated="false" collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Dependents" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <content>
+                                                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                                         <children>
+                                                            <TreeView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                         </children>
+                                                      </AnchorPane>
+                                                  </content>
+                                                </TitledPane>
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                    </SplitPane>
+                                    <HBox maxWidth="1.7976931348623157E308" spacing="5.0" VBox.vgrow="NEVER">
+                                       <children>
+                                          <Pane maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                                          <Button mnemonicParsing="false" onAction="#doShowRoles" text="Show Roles" />
+                                          <Button mnemonicParsing="false" onAction="#doReloadClient" text="Reload Client" />
+                                          <Pane maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </AnchorPane>
-                          </items>
-                        </SplitPane>
-                        <HBox maxWidth="1.7976931348623157E308" spacing="5.0" VBox.vgrow="NEVER">
-                           <children>
-                              <Pane maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                              <Button mnemonicParsing="false" text="Show Roles" />
-                              <Button mnemonicParsing="false" text="Reload Client" />
-                              <Pane maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                              </VBox>
                            </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </content>
+            </Tab>
+            <Tab text="Test">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab text="Technical Test">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+         </tabs>
+      </TabPane>
    </center>
 </BorderPane>

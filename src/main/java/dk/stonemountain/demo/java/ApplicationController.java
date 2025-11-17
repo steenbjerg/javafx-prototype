@@ -5,16 +5,16 @@ import javafx.fxml.FXML;
 
 public class ApplicationController {
     @FXML
-    private void initialize() {
+    public void initialize() {
     }
 
     @FXML
-    private void doQuit() {
+    public void doQuit() {
         Platform.exit();
     }
 
     @FXML
-    private void doAbout() {
+    public void doAbout() {
         System.out.println("About action triggered");
     }
 }
