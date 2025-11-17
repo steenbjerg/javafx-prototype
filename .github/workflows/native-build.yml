@@ -1,0 +1,80 @@
+name: NativeBuild
+
+on:
+  push:
+    branches: [ main, keycloak ]
+    tags:
+      - '*'
+
+env:
+  APP_NAME: javafx-prototype
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        include:
+          - os: ubuntu-latest
+            architecture: x86_64-linux
+            executeable-extension: 
+          # - os: windows-latest          
+          #   architecture: x86_64-windows
+          #   executeable-extension: .exe
+          # - os: macos-latest
+          #   architecture: aarch64-darwin
+          #   executeable-extension: 
+          # - os: macos-13
+          #   architecture: x86_64-darwin
+          #   executeable-extension: 
+
+    steps:
+    - name: Get OS info
+      run: uname -a
+
+    - uses: actions/checkout@v4.1.2
+      name: Checkout the repository
+
+    - name: check if musl based
+      run: ldd --version
+
+    - uses: graalvm/setup-graalvm@v1.4.2
+      with:
+        distribution: 'liberica'
+        java-version: '25'
+        java-package: 'jdk+fx'
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        cache: gradle
+
+    - if: matrix.os == 'ubuntu-latest'
+      name: Install libraries
+      run: |
+          sudo apt update
+          sudo apt install libasound2-dev libavcodec-dev libavformat-dev libavutil-dev libgl-dev libgtk-3-dev libpango1.0-dev libxtst-dev
+
+    - name: Printing GRAALVM Versions
+      run: |
+        echo "GRAALVM_HOME: $GRAALVM_HOME"
+        echo "JAVA_HOME: $JAVA_HOME"
+        java --version
+        native-image --version
+        ./gradlew --version
+
+    - name: Build native client
+      run: ./gradlew -s nativeCompile
+
+    - name: See build nativeCompilation folders for architecture
+      run: ls -l build/native/nativeCompile
+  
+    - name: Make dist directory
+      run: mkdir dist
+
+    - name: Copy native client to dist
+      run: cp -r build/native/nativeCompile/${{ env.APP_NAME }}${{ matrix.executeable-extension }} dist
+      
+    - name: Upload
+      uses: actions/upload-artifact@v4.3.1
+      with:
+        name: ${{ env.APP_NAME }}-${{ matrix.os }}
+        path: dist

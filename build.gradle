@@ -1,0 +1,58 @@
+plugins {
+  id 'application'
+  id 'org.graalvm.buildtools.native' version '0.11.1'
+}
+
+ext {
+	libraryVersions = [
+	]
+}
+
+repositories {
+	mavenCentral()
+}
+
+group "dk.stonemountain.demo"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+}
+
+application {
+    mainClass.set('dk.stonemountain.demo.java.Main')
+}
+
+dependencies {
+}
+
+graalvmNative {
+    binaries.all {
+		resources.autodetect()
+        verbose = true
+    }
+
+    binaries.main {
+        imageName = 'java-demo'
+        mainClass = 'dk.stonemountain.demo.java.Main'
+		buildArgs.addAll([
+            "--gc=G1"
+        ])
+    }
+
+	agent {
+		enabled = true
+		defaultMode = "standard"
+
+		modes {
+			standard {
+			}
+		}
+		
+		metadataCopy {
+			inputTaskNames.add("run")
+			outputDirectories.add("src/main/resources/META-INF/native-image")
+			mergeWithExisting = true
+		}    
+	}
+}
