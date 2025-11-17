@@ -11,7 +11,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.TreeView;
-import javafx.util.StringConverter;
 
 public class KeycloakController extends ApplicationController {
     private static final Logger LOG = Logger.getLogger(KeycloakController.class.getName());

@@ -1,9 +1,13 @@
 package dk.stonemountain.demo.java;
 
+import java.util.logging.Logger;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 public class ApplicationController {
+    private static final Logger LOG = Logger.getLogger(ApplicationController.class.getName());
+    
     @FXML
     public void initialize() {
     }
@@ -15,6 +19,6 @@ public class ApplicationController {
 
     @FXML
     public void doAbout() {
-        System.out.println("About action triggered");
+        LOG.info("About action triggered");
     }
 }

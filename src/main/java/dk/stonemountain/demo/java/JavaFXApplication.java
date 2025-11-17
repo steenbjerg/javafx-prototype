@@ -16,8 +16,8 @@ public class JavaFXApplication extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/prototype.fxml"));
         Parent root = loader.load();        
         Scene scene = new Scene(root);
-        
-        primaryStage.setTitle("JavaFX Prototyping");
+        scene.getStylesheets().add(ApplicationConfiguration.instance.getStyleSheet());
+        primaryStage.setTitle(ApplicationConfiguration.instance.getName());
         primaryStage.setScene(scene);
         primaryStage.show();
     }
